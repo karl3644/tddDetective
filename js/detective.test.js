@@ -2,6 +2,7 @@ const Suspect = require('./the_crime_scene/suspect.js');
 const Victim = require('./the_crime_scene/victim.js');
 const Crime = require('./the_crime_scene/crime.js');
 const Detective = require('./detective.js');
+const Witness = require('./the_crime_scene/witness.js');
 
 test('The case with only one suspect', () => {
     let fryingPan = 'frying pan';
@@ -31,7 +32,7 @@ test('The case with two suspects in the same location', () => {
     professorPan.seenIn(clockTower);
 
     let captainCustard = new Suspect('Captain Custard');
-    captainCustard.seenIn(clockTower)
+    captainCustard.seenIn(clockTower);
 
     let crime = new Crime(victim, professorPan, captainCustard);
 
@@ -75,11 +76,17 @@ test('The case with a Witness', () => {
     let sergeantSaucepan = new Suspect('Sergeant Saucepan');
     let wizardWok = new Suspect('Wizard Wok');
 
-    let witness = new Witness(wizardWok.name, wok, observatory)
+    let witness = new Witness(wizardWok.name, wok, observatory);
 
-    let crime = new Crime(victim, professorPan, sergeantSaucepan, wizardWok, witness);
+    let crime = new Crime(
+        victim,
+        professorPan,
+        sergeantSaucepan,
+        wizardWok,
+        witness
+    );
 
     let detective = new Detective();
 
-    expect(wizardWok).toBe(detective.solve(crime));
+    expect(detective.solve(crime)).toBe(wizardWok);
 });
